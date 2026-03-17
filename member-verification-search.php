@@ -75,7 +75,7 @@ class Member_Verification_Search {
         
         $user_id = $wpdb->get_var($wpdb->prepare(
             "SELECT user_id FROM {$wpdb->usermeta} 
-            WHERE meta_key = 'membership_id' 
+            WHERE meta_key = '_membership_id' 
             AND meta_value = %s 
             LIMIT 1",
             $id_number
