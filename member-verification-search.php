@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Member Verification Search
  * Plugin URI: https://cloudswired.com.my
- * Description: Search and verify members by ID number using usermeta field. Use shortcode [member_search] to display search form.
+ * Description: Search and verify members by membership ID using usermeta field. Use shortcode [member_search] to display search form.
  * Version: 1.0.0
  * Author: Shukry Radzi
  * Author URI: https://cloudswired.com.my
@@ -46,8 +46,8 @@ class Member_Verification_Search {
                 <h3>Member Verification</h3>
                 <form id="member-search-form" class="mvs-form">
                     <div class="mvs-input-group">
-                        <label for="id_number">Enter ID Number:</label>
-                        <input type="text" id="id_number" name="id_number" placeholder="Enter member ID number" required>
+                        <label for="id_number">Enter Membership ID:</label>
+                        <input type="text" id="id_number" name="id_number" placeholder="Enter membership ID" required>
                     </div>
                     <button type="submit" class="mvs-btn">Search Member</button>
                 </form>
@@ -68,14 +68,14 @@ class Member_Verification_Search {
         $id_number = sanitize_text_field($_POST['id_number']);
         
         if (empty($id_number)) {
-            wp_send_json_error(array('message' => 'Please enter an ID number.'));
+            wp_send_json_error(array('message' => 'Please enter a membership ID.'));
         }
         
         global $wpdb;
         
         $user_id = $wpdb->get_var($wpdb->prepare(
             "SELECT user_id FROM {$wpdb->usermeta} 
-            WHERE meta_key = 'id_number' 
+            WHERE meta_key = 'membership_id' 
             AND meta_value = %s 
             LIMIT 1",
             $id_number
@@ -103,7 +103,7 @@ class Member_Verification_Search {
             }
         }
         
-        wp_send_json_error(array('message' => 'Member not found. This ID number is not registered.'));
+        wp_send_json_error(array('message' => 'Member not found. This membership ID is not registered.'));
     }
 }
 
