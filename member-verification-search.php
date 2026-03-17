@@ -1,9 +1,11 @@
 <?php
 /**
  * Plugin Name: Member Verification Search
+ * Plugin URI: https://cloudswired.com.my
  * Description: Search and verify members by ID number using usermeta field. Use shortcode [member_search] to display search form.
  * Version: 1.0.0
- * Author: Your Name
+ * Author: Shukry Radzi
+ * Author URI: https://cloudswired.com.my
  * Text Domain: member-verification-search
  */
 
