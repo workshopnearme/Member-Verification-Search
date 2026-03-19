@@ -23,7 +23,7 @@ class Member_Verification_Search {
     }
     
     public function enqueue_styles() {
-        wp_enqueue_style('member-verification-search', plugin_dir_url(__FILE__) . 'style.css', array(), '1.0.0');
+        wp_enqueue_style('member-verification-search', plugin_dir_url(__FILE__) . 'style.css', array(), '1.1.0');
         
         wp_enqueue_script('qrcodejs', 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js', array(), '1.0.0', true);
         wp_enqueue_script('html2canvas', 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js', array(), '1.4.1', true);
