@@ -202,61 +202,27 @@
     }
 }
 
-/* Membership Card Styles */
+/* Membership Card Styles - Apple Inspired Design */
 .mvs-membership-card {
-    background: linear-gradient(135deg, #2B2D6E 0%, #3D3E7E 100%);
-    border-radius: 20px;
-    padding: 35px;
-    color: #ffffff;
-    box-shadow: 0 20px 60px rgba(43, 45, 110, 0.5);
-    position: relative;
+    background: #ffffff;
+    border-radius: 16px;
     overflow: hidden;
-    border: 3px solid rgba(253, 185, 19, 0.3);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    max-width: 100%;
 }
 
-.mvs-membership-card::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(253, 185, 19, 0.15) 0%, transparent 70%);
-    pointer-events: none;
-}
-
+/* Header Section */
 .mvs-card-header {
-    text-align: center;
-    margin-bottom: 30px;
+    background: linear-gradient(135deg, #2B2D6E 0%, #3D3E7E 100%);
+    padding: 32px 28px;
     position: relative;
-    z-index: 1;
-    border-bottom: 2px solid rgba(253, 185, 19, 0.3);
-    padding-bottom: 20px;
 }
 
-.mvs-card-logo {
-    font-size: 52px;
-    margin-bottom: 12px;
-    filter: drop-shadow(0 4px 8px rgba(253, 185, 19, 0.3));
-}
-
-.mvs-card-header h2 {
-    margin: 0;
-    font-size: 26px;
-    font-weight: 700;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: #FDB913;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-}
-
-.mvs-card-body {
+.mvs-header-content {
     display: flex;
-    gap: 25px;
     align-items: center;
-    margin-bottom: 20px;
-    position: relative;
-    z-index: 1;
+    gap: 20px;
 }
 
 .mvs-card-avatar {
@@ -264,113 +230,244 @@
 }
 
 .mvs-card-avatar img {
-    width: 130px;
-    height: 130px;
+    width: 90px;
+    height: 90px;
     border-radius: 50%;
-    border: 5px solid #FDB913;
+    border: 3px solid rgba(255, 255, 255, 0.9);
     object-fit: cover;
-    box-shadow: 0 8px 25px rgba(253, 185, 19, 0.4);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.mvs-card-info {
+.mvs-header-info {
     flex: 1;
 }
 
 .mvs-card-name {
-    font-size: 30px;
-    font-weight: 700;
-    margin-bottom: 18px;
-    color: #FDB913;
-    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-}
-
-.mvs-card-field {
-    margin-bottom: 12px;
-    font-size: 15px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.mvs-card-label {
+    font-size: 26px;
     font-weight: 600;
-    color: rgba(253, 185, 19, 0.9);
-    min-width: 110px;
-}
-
-.mvs-card-value {
-    font-weight: 500;
-    background: rgba(255, 255, 255, 0.15);
-    padding: 6px 14px;
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(253, 185, 19, 0.2);
     color: #ffffff;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
 }
 
-.mvs-card-status {
+.mvs-card-id {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.mvs-card-status-badge {
     display: inline-block;
     background: #FDB913;
     color: #2B2D6E;
-    padding: 6px 18px;
-    border-radius: 20px;
-    font-weight: 700;
-    font-size: 13px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    box-shadow: 0 4px 15px rgba(253, 185, 19, 0.5);
+    letter-spacing: 0.5px;
 }
 
-.mvs-card-footer {
-    text-align: center;
-    padding-top: 20px;
-    border-top: 2px solid rgba(253, 185, 19, 0.3);
+/* Card Sections */
+.mvs-card-section {
+    padding: 24px 28px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.mvs-card-section:last-child {
+    border-bottom: none;
+}
+
+.mvs-section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #86868b;
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin: 0 0 16px 0;
+}
+
+/* Contact Grid */
+.mvs-contact-grid {
+    display: grid;
+    gap: 16px;
+}
+
+.mvs-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.mvs-contact-icon {
+    font-size: 24px;
+    line-height: 1;
+    margin-top: 2px;
+}
+
+.mvs-contact-details {
+    flex: 1;
+}
+
+.mvs-contact-label {
+    font-size: 13px;
+    color: #86868b;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.mvs-contact-value {
+    font-size: 16px;
+    color: #1d1d1f;
+    font-weight: 400;
+}
+
+/* Education Timeline */
+.mvs-education-timeline {
+    position: relative;
+}
+
+.mvs-education-item {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.mvs-education-item:last-child {
+    margin-bottom: 0;
+}
+
+.mvs-education-item:not(:last-child)::after {
+    content: '';
+    position: absolute;
+    left: 7px;
+    top: 24px;
+    bottom: -20px;
+    width: 2px;
+    background: rgba(0, 0, 0, 0.08);
+}
+
+.mvs-education-marker {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: #FDB913;
+    border: 3px solid #ffffff;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08);
+    flex-shrink: 0;
+    margin-top: 3px;
     position: relative;
     z-index: 1;
 }
 
-.mvs-card-date {
-    font-size: 14px;
-    color: rgba(253, 185, 19, 0.9);
+.mvs-education-content {
+    flex: 1;
+}
+
+.mvs-education-level {
+    font-size: 12px;
     font-weight: 600;
-}
-
-/* Download Section */
-.mvs-download-section {
-    margin-top: 25px;
-    text-align: center;
-}
-
-.mvs-download-btn {
-    padding: 18px 40px;
-    font-size: 18px;
-    font-weight: 700;
-    color: #2B2D6E;
-    background: linear-gradient(135deg, #FDB913 0%, #FFC933 100%);
-    border: none;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 8px 25px rgba(253, 185, 19, 0.4);
-    display: inline-flex;
-    align-items: center;
-    gap: 12px;
+    color: #FDB913;
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
 }
 
-.mvs-download-btn:hover {
-    background: linear-gradient(135deg, #FFC933 0%, #FFD54F 100%);
-    transform: translateY(-3px);
-    box-shadow: 0 12px 35px rgba(253, 185, 19, 0.5);
+.mvs-education-title {
+    font-size: 16px;
+    font-weight: 500;
+    color: #1d1d1f;
+    margin-bottom: 4px;
+    line-height: 1.4;
 }
 
-.mvs-download-btn:active {
+.mvs-education-years {
+    font-size: 14px;
+    color: #86868b;
+    font-weight: 400;
+}
+
+/* Info Grid */
+.mvs-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.mvs-info-item {
+    background: rgba(0, 0, 0, 0.02);
+    padding: 12px 16px;
+    border-radius: 10px;
+}
+
+.mvs-info-label {
+    font-size: 12px;
+    color: #86868b;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.mvs-info-value {
+    font-size: 16px;
+    color: #1d1d1f;
+    font-weight: 500;
+}
+
+/* Action Buttons Section */
+.mvs-action-section {
+    padding: 20px 28px 28px;
+    display: flex;
+    gap: 12px;
+}
+
+.mvs-action-btn {
+    flex: 1;
+    padding: 14px 20px;
+    font-size: 15px;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.mvs-btn-icon {
+    font-size: 18px;
+}
+
+.mvs-btn-primary {
+    background: #2B2D6E;
+    color: #ffffff;
+}
+
+.mvs-btn-primary:hover {
+    background: #1f2152;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(43, 45, 110, 0.25);
+}
+
+.mvs-btn-secondary {
+    background: rgba(0, 0, 0, 0.04);
+    color: #1d1d1f;
+}
+
+.mvs-btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.08);
     transform: translateY(-1px);
 }
 
-.mvs-download-btn:disabled {
-    opacity: 0.7;
+.mvs-action-btn:active {
+    transform: translateY(0);
+}
+
+.mvs-action-btn:disabled {
+    opacity: 0.5;
     cursor: not-allowed;
     transform: none;
 }
@@ -381,47 +478,42 @@
     }
     
     .mvs-search-box {
-        padding: 20px;
+        padding: 30px 20px;
     }
     
-    .mvs-info-row {
-        flex-direction: column;
-        gap: 5px;
+    .mvs-card-header {
+        padding: 24px 20px;
     }
     
-    .mvs-info-label {
-        min-width: auto;
-    }
-    
-    .mvs-membership-card {
-        padding: 20px;
-    }
-    
-    .mvs-card-body {
+    .mvs-header-content {
         flex-direction: column;
         text-align: center;
+        gap: 16px;
     }
     
     .mvs-card-avatar img {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
     }
     
     .mvs-card-name {
         font-size: 22px;
     }
     
-    .mvs-card-field {
+    .mvs-card-section {
+        padding: 20px;
+    }
+    
+    .mvs-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .mvs-action-section {
         flex-direction: column;
-        gap: 4px;
+        padding: 16px 20px 24px;
     }
     
-    .mvs-card-label {
-        min-width: auto;
-    }
-    
-    .mvs-download-btn {
+    .mvs-action-btn {
         width: 100%;
-        justify-content: center;
     }
 }

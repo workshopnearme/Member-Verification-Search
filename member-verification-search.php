@@ -23,12 +23,12 @@ class Member_Verification_Search {
     }
     
     public function enqueue_styles() {
-        wp_enqueue_style('member-verification-search', plugin_dir_url(__FILE__) . 'style.css', array(), '1.1.0');
+        wp_enqueue_style('member-verification-search', plugin_dir_url(__FILE__) . 'style.css', array(), '1.2.0');
         
         wp_enqueue_script('qrcodejs', 'https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js', array(), '1.0.0', true);
         wp_enqueue_script('html2canvas', 'https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js', array(), '1.4.1', true);
         wp_enqueue_script('jspdf', 'https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js', array(), '2.5.1', true);
-        wp_enqueue_script('member-verification-search', plugin_dir_url(__FILE__) . 'script.js', array('jquery', 'qrcodejs', 'html2canvas', 'jspdf'), '1.0.0', true);
+        wp_enqueue_script('member-verification-search', plugin_dir_url(__FILE__) . 'script.js', array('jquery', 'qrcodejs', 'html2canvas', 'jspdf'), '1.2.0', true);
         
         wp_localize_script('member-verification-search', 'memberSearch', array(
             'ajax_url' => admin_url('admin-ajax.php'),
@@ -87,16 +87,57 @@ class Member_Verification_Search {
             if ($user) {
                 $avatar_url = get_avatar_url($user_id, array('size' => 150));
                 
+                // Get education info
+                $education = array();
+                
+                // Diploma
+                if (get_user_meta($user_id, 'diploma_title', true)) {
+                    $education['diploma'] = array(
+                        'title' => get_user_meta($user_id, 'diploma_title', true),
+                        'enroll_year' => get_user_meta($user_id, 'diploma_enroll_year', true),
+                        'graduate_year' => get_user_meta($user_id, 'diploma_graduate_year', true)
+                    );
+                }
+                
+                // Degree
+                if (get_user_meta($user_id, 'degree_title', true)) {
+                    $education['degree'] = array(
+                        'title' => get_user_meta($user_id, 'degree_title', true),
+                        'enroll_year' => get_user_meta($user_id, 'degree_enroll_year', true),
+                        'graduate_year' => get_user_meta($user_id, 'degree_graduate_year', true)
+                    );
+                }
+                
+                // Master
+                if (get_user_meta($user_id, 'master_title', true)) {
+                    $education['master'] = array(
+                        'title' => get_user_meta($user_id, 'master_title', true),
+                        'enroll_year' => get_user_meta($user_id, 'master_enroll_year', true),
+                        'graduate_year' => get_user_meta($user_id, 'master_graduate_year', true)
+                    );
+                }
+                
+                // PhD
+                if (get_user_meta($user_id, 'phd_title', true)) {
+                    $education['phd'] = array(
+                        'title' => get_user_meta($user_id, 'phd_title', true),
+                        'enroll_year' => get_user_meta($user_id, 'phd_enroll_year', true),
+                        'graduate_year' => get_user_meta($user_id, 'phd_graduate_year', true)
+                    );
+                }
+                
                 $response = array(
                     'found' => true,
                     'name' => $user->display_name,
                     'email' => $user->user_email,
+                    'phone' => get_user_meta($user_id, 'billing_phone', true),
                     'id_number' => $id_number,
                     'username' => $user->user_login,
                     'registered' => date('d M Y', strtotime($user->user_registered)),
                     'avatar' => $avatar_url,
                     'member_since' => date('Y', strtotime($user->user_registered)),
-                    'status' => 'Active'
+                    'status' => 'Active',
+                    'education' => $education
                 );
                 
                 wp_send_json_success($response);

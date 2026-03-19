@@ -63,35 +63,137 @@ jQuery(document).ready(function($) {
         window.currentMemberData = data;
         
         var html = '<div class="mvs-membership-card" id="membership-card">';
+        
+        // Header Section
         html += '<div class="mvs-card-header">';
-        html += '<div class="mvs-card-logo">🎫</div>';
-        html += '<h2>MEMBERSHIP CARD</h2>';
-        html += '</div>';
-        html += '<div class="mvs-card-body">';
+        html += '<div class="mvs-header-content">';
         html += '<div class="mvs-card-avatar">';
         html += '<img src="' + data.avatar + '" alt="Member Photo" />';
         html += '</div>';
-        html += '<div class="mvs-card-info">';
-        html += '<div class="mvs-card-name">' + data.name + '</div>';
-        html += '<div class="mvs-card-field"><span class="mvs-card-label">ID Number:</span> <span class="mvs-card-value">' + data.id_number + '</span></div>';
-        html += '<div class="mvs-card-field"><span class="mvs-card-label">Email:</span> <span class="mvs-card-value">' + data.email + '</span></div>';
-        html += '<div class="mvs-card-field"><span class="mvs-card-label">Member Since:</span> <span class="mvs-card-value">' + data.member_since + '</span></div>';
-        html += '<div class="mvs-card-field"><span class="mvs-card-label">Status:</span> <span class="mvs-card-status">' + data.status + '</span></div>';
+        html += '<div class="mvs-header-info">';
+        html += '<h2 class="mvs-card-name">' + data.name + '</h2>';
+        html += '<div class="mvs-card-id">ID: ' + data.id_number + '</div>';
+        html += '<div class="mvs-card-status-badge">' + data.status + '</div>';
         html += '</div>';
         html += '</div>';
-        html += '<div class="mvs-card-footer">';
-        html += '<div class="mvs-card-date">Valid from: ' + data.registered + '</div>';
+        html += '</div>';
+        
+        // Contact Section
+        html += '<div class="mvs-card-section">';
+        html += '<h3 class="mvs-section-title">Contact Information</h3>';
+        html += '<div class="mvs-contact-grid">';
+        html += '<div class="mvs-contact-item">';
+        html += '<div class="mvs-contact-icon">✉️</div>';
+        html += '<div class="mvs-contact-details">';
+        html += '<div class="mvs-contact-label">Email</div>';
+        html += '<div class="mvs-contact-value">' + data.email + '</div>';
         html += '</div>';
         html += '</div>';
-        html += '<div class="mvs-download-section">';
-        html += '<button id="download-pdf-btn" class="mvs-download-btn">📥 Download as PDF</button>';
+        if (data.phone) {
+            html += '<div class="mvs-contact-item">';
+            html += '<div class="mvs-contact-icon">📱</div>';
+            html += '<div class="mvs-contact-details">';
+            html += '<div class="mvs-contact-label">Phone</div>';
+            html += '<div class="mvs-contact-value">' + data.phone + '</div>';
+            html += '</div>';
+            html += '</div>';
+        }
+        html += '</div>';
+        html += '</div>';
+        
+        // Education Section
+        if (data.education && Object.keys(data.education).length > 0) {
+            html += '<div class="mvs-card-section">';
+            html += '<h3 class="mvs-section-title">Education Timeline</h3>';
+            html += '<div class="mvs-education-timeline">';
+            
+            var educationOrder = ['diploma', 'degree', 'master', 'phd'];
+            var educationLabels = {
+                'diploma': 'Diploma',
+                'degree': 'Degree',
+                'master': 'Master',
+                'phd': 'PhD'
+            };
+            
+            for (var i = 0; i < educationOrder.length; i++) {
+                var level = educationOrder[i];
+                if (data.education[level]) {
+                    var edu = data.education[level];
+                    html += '<div class="mvs-education-item">';
+                    html += '<div class="mvs-education-marker"></div>';
+                    html += '<div class="mvs-education-content">';
+                    html += '<div class="mvs-education-level">' + educationLabels[level] + '</div>';
+                    html += '<div class="mvs-education-title">' + edu.title + '</div>';
+                    html += '<div class="mvs-education-years">' + edu.enroll_year + ' - ' + edu.graduate_year + '</div>';
+                    html += '</div>';
+                    html += '</div>';
+                }
+            }
+            
+            html += '</div>';
+            html += '</div>';
+        }
+        
+        // Member Info Section
+        html += '<div class="mvs-card-section">';
+        html += '<div class="mvs-info-grid">';
+        html += '<div class="mvs-info-item">';
+        html += '<div class="mvs-info-label">Member Since</div>';
+        html += '<div class="mvs-info-value">' + data.member_since + '</div>';
+        html += '</div>';
+        html += '<div class="mvs-info-item">';
+        html += '<div class="mvs-info-label">Registered</div>';
+        html += '<div class="mvs-info-value">' + data.registered + '</div>';
+        html += '</div>';
+        html += '</div>';
+        html += '</div>';
+        
+        html += '</div>';
+        
+        // Action Buttons
+        html += '<div class="mvs-action-section">';
+        html += '<button id="save-contact-btn" class="mvs-action-btn mvs-btn-primary">';
+        html += '<span class="mvs-btn-icon">📇</span> Save to Phone';
+        html += '</button>';
+        html += '<button id="download-pdf-btn" class="mvs-action-btn mvs-btn-secondary">';
+        html += '<span class="mvs-btn-icon">📥</span> Download PDF';
+        html += '</button>';
         html += '</div>';
         
         showResult('success', html);
         
+        // Event handlers
+        $('#save-contact-btn').on('click', function() {
+            saveToPhone(data);
+        });
+        
         $('#download-pdf-btn').on('click', function() {
             downloadMembershipCardPDF();
         });
+    }
+    
+    function saveToPhone(data) {
+        // Create vCard
+        var vcard = 'BEGIN:VCARD\n';
+        vcard += 'VERSION:3.0\n';
+        vcard += 'FN:' + data.name + '\n';
+        vcard += 'EMAIL:' + data.email + '\n';
+        if (data.phone) {
+            vcard += 'TEL:' + data.phone + '\n';
+        }
+        vcard += 'NOTE:Alumni UiTM Sabah - Member ID: ' + data.id_number + '\n';
+        vcard += 'END:VCARD';
+        
+        // Create download link
+        var blob = new Blob([vcard], { type: 'text/vcard' });
+        var url = window.URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.href = url;
+        link.download = data.name.replace(/\s+/g, '_') + '.vcf';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        window.URL.revokeObjectURL(url);
     }
     
     function downloadMembershipCardPDF() {
